@@ -1,0 +1,143 @@
+{% load static %}
+
+    <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" class="simple-text logo-mini">
+            MY
+          </a>
+          <a href="javascript:void(0)" class="simple-text logo-normal">
+            {{user}}
+          </a>
+        </div>
+        <ul class="nav">
+          <li>
+            <a class="active" href="{% url 'list_artikel' %}">Table Artikel</a>
+          </li>
+          
+          {% if request.session.is_operator == 'operator' %}
+            <li>
+              <a class="active" href="{% url 'users' %}">Tabel User</a>
+            </li>
+            <li><a class="active" href="{% url 'index' %}" >Home</a></li>
+						<li><a href="{% url 'doa' %}" class="active">Doa</a></li>
+						<li><a href="{% url 'about' %}" class="active">About</a></li>
+						{% comment %} <li><a href="{% url 'list_artikel' %}" class="active">Artikel</a></li> {% endcomment %}
+          {% endif %}
+            
+
+
+        </ul>
+      </div>
+    </div>
+
+<div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="javascript:void(0)">Table Users</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+              <li class="search-bar input-group">
+              </li>
+
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="photo">
+                    <img src="{% static 'dashboard/img/anime3.png' %}" alt="Profile Photo">
+                  </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link"><a href="{% url 'logout' %}" class="nav-item dropdown-item">Log out</a></li>
+                </ul>
+              </li>
+              <li class="separator d-lg-none"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title">Table</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Is Staff</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for l in list_user %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{l.username}}</td>
+                          <td>{{l.email}}</td>
+                          <td>{{l.is_staff}}</td>
+                          {% comment %} <td>
+                            <button class="btn btn-info btn-sm" href=""> Detail</button>
+                            <button class="btn btn-primary btn-sm" href=""> Update</button>
+														<a onclick="alert('Apakah anda yakin user ini akan dihapus ?')" class="btn btn-danger btn-sm" href="">Delete</a>
+                          </td> {% endcomment %}
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          
+          <div class="copyright">
+            ©
+            <script>
+              document.write(new Date().getFullYear())
+            </script>2018 made with <i class="tim-icons icon-heart-2"></i> by
+            <a href="javascript:void(0)" target="_blank">Creative Tim</a> for a better web.
+          </div>
+        </div>
+      </footer>
+    </div>

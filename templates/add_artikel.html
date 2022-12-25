@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="icon" type="image/png" href="{% static 'dashboard/img/favicon.png' %}">
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="" class="title">Doa Ku Hari Ini</a> 
+				<nav>
+					<ul>
+						<li><a class="active" href="{% url 'index' %}" >Home</a></li>
+						<li><a href="{% url 'doa' %}" class="active">Doa</a></li>
+						<li><a href="{% url 'about' %}" class="active">About</a></li>
+						<li><a href="{% url 'list_artikel' %}" class="active">Artikel</a></li>
+						<li><a href="{% url 'users' %}" class="active">Dashboard</a></li>
+					</ul>
+				</nav>
+			</header>
+
+                            <!-- Form -->
+								<section>
+									<h2>Tambah Artikel Baru</h2>
+									<form method="POST">
+                                        {% csrf_token %}
+										<div class="row gtr-uniform">
+											<label class = "control-label">Judul</label>
+											<div class="col-6 col-12">
+												{% comment %} <input type="text" name="nama" value="{{ get_daftar.nama }}" placeholder="Judul" /> {% endcomment %}
+												{{forms_daftar.judul}}
+											</div>
+											<label class = "control-label">Deskripsi</label>
+											<div class="col-12">
+												{% comment %} <textarea name="deskripsi" placeholder="Deskripsi" rows="6">{{ get_daftar.deskripsi }}</textarea> {% endcomment %}
+												{{forms_daftar.deskripsi}}
+											</div>
+											<div class="col-12">
+												<label class = "control-label">Kategori</label>
+												{% comment %} <select name="kategori" id="">
+                                                    <option value="">- Kategori -</option>
+                                                    {% for kategori in kategori %}
+                                                        {% if get_daftar.kategori == kategori %}
+                                                            <option value="{{ kategori.nama }}" selected="selected">{{ kategori.nama}} </option>
+                                                        {% else %}
+                                                            <option value="{{ kategori.nama }}">{{ kategori.nama}} </option>
+                                                        {% endif %}
+                                                    {% endfor %}
+												</select> {% endcomment %}
+												{{forms_daftar.kategori}}
+											</div>
+											<div >
+												<button type="submit" class="btn btn-primary">Submit </button>
+											</div>
+										</div>
+									</form>
+								</section>
+        <!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
